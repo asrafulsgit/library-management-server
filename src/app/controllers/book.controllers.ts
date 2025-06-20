@@ -7,7 +7,7 @@ import { ZodError } from 'zod';
 
 
 // Create a new book
-export const createBook = async (req: Request, res: Response) => {
+export const createBook = async (req: Request, res: Response)  => {
   try {
     const parsed = createBookSchema.parse(req.body);
 
@@ -55,7 +55,7 @@ export const createBook = async (req: Request, res: Response) => {
 };
 
 // Read books
-export const getAllBooks = async (req: Request, res: Response) => {
+export const getAllBooks = async (req: Request, res: Response)  => {
   try {
     const { filter, 
       sortBy = 'createdAt', 
@@ -89,7 +89,7 @@ export const getAllBooks = async (req: Request, res: Response) => {
 };
 
 // Read a book by ID
-export const getBookById = async (req: Request, res: Response) => {
+export const getBookById = async (req: Request, res: Response)  => {
   try {
 
     const parsed = bookIdValidation.parse(req.params);
@@ -134,7 +134,7 @@ export const getBookById = async (req: Request, res: Response) => {
 };
 
 // Update a book by ID
-export const updateBook = async (req: Request, res: Response) => {
+export const updateBook = async (req: Request, res: Response)  => {
   try {
 
     const updateData = updateBookSchema.parse(req.body);
@@ -306,7 +306,7 @@ export const borrowBook = async (req: Request, res: Response) => {
 
 
 // get books summary
-export const booksSummary = async (req: Request, res: Response) => {
+export const booksSummary = async (req: Request, res: Response) : Promise<Response> => {
   try {
     const summary = await Borrow.aggregate([
       {
