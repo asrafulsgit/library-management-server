@@ -2,12 +2,13 @@ import { Document, Types } from "mongoose";
 
 export interface IBook extends Document {
   title: string;
-  author: string;
+  author: string; 
   genre: string;
   isbn: string;
   description?: string;
   copies: number;
   available: boolean;
+  updateCopiesAfterBorrow(quantity: number) : void;
 }
 
 export interface IBorrowBook extends Document {

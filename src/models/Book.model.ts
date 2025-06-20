@@ -50,5 +50,13 @@ const bookSchema: Schema = new Schema<IBook>(
   }
 );
 
+bookSchema.methods.updateCopiesAfterBorrow = async function (quantity: number) {
+    this.copies -= quantity;
+    if (this.copies <= 0) {
+        this.available = false;
+        this.copies = 0; 
+    }
+}  
+
 const Book = model<IBook>('Book', bookSchema);
 export default Book;
