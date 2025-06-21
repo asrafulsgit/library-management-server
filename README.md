@@ -32,6 +32,30 @@ This project simulates a mini-library system for managing book inventory and bor
 * **MongoDB** with Mongoose ODM
 * **Zod** for schema validation
 
+
+## ▶️ Setup Project locally
+
+# 1. Clone the repository
+git clone https://github.com/asrafulsgit/l2-assignment-03
+
+# 2. Navigate to the project folder
+cd l2-assignment-03
+
+# 3. Install dependencies
+npm install
+# or
+yarn install
+
+# 4. Create a .env file and add the following:
+PORT=8000
+MONGO_URI=mongodb://localhost:27017/libraryDB
+
+# Running the Server in Development
+npm run dev
+# or
+yarn dev
+
+
 ---
 
 ## 🌐 API Endpoints
