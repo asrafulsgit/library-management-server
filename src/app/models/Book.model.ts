@@ -49,6 +49,12 @@ const bookSchema: Schema = new Schema<IBook>(
     timestamps: true
   }
 );
+bookSchema.pre('save', function (next) {
+  if (this.isModified('copies') && this.copies === 0) {
+    this.available = false;
+  }
+  next();
+});
 
 bookSchema.methods.updateCopiesAfterBorrow = async function (quantity: number) {
     this.copies -= quantity;
