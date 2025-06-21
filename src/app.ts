@@ -10,9 +10,5 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api',bookRouter)
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-}); 
-
 
 export default app;

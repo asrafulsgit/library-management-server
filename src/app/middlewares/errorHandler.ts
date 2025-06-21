@@ -17,6 +17,7 @@ export const createBookSchema = z.object({
   }).min(0, 'Copies must be a non-negative number'),
   available: z.boolean().optional().default(true)
 });
+
 export const updateBookSchema = z.object({
   title: z.string({ required_error: 'Title is required' }).optional(),
   author: z.string({ required_error: 'Author is required' }).optional(),
@@ -42,6 +43,7 @@ export const borrowBookSchema = z.object({
     message: 'A valid due date is required',
   }),
 });
+
 export const bookIdValidation = z.object({
   bookId: z.string().refine((val) => /^[a-f\d]{24}$/i.test(val), {
     message: 'Invalid book ID format',
