@@ -43,6 +43,12 @@ const bookSchema = new mongoose_1.Schema({
 }, {
     timestamps: true
 });
+bookSchema.pre('save', function (next) {
+    if (this.isModified('copies') && this.copies === 0) {
+        this.available = false;
+    }
+    next();
+});
 bookSchema.methods.updateCopiesAfterBorrow = async function (quantity) {
     this.copies -= quantity;
     if (this.copies <= 0) {

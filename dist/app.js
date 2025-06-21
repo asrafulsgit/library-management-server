@@ -11,7 +11,4 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/api', book_routes_1.default);
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 exports.default = app;
