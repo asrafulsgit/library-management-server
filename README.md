@@ -36,10 +36,10 @@ This project simulates a mini-library system for managing book inventory and bor
 ## ▶️ Setup Project locally
 
 # 1. Clone the repository
-git clone https://github.com/asrafulsgit/l2-assignment-03
+git clone https://github.com/asrafulsgit/library-management-server.git
 
 # 2. Navigate to the project folder
-cd l2-assignment-03
+cd library-management
 
 # 3. Install dependencies
 npm install
@@ -48,7 +48,7 @@ yarn install
 
 # 4. Create a .env file and add the following:
 PORT=8000
-MONGO_URI=mongodb://localhost:27017/libraryDB
+MONGO_URI= ''
 
 # Running the Server in Development
 npm run dev
