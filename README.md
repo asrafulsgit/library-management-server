@@ -1,4 +1,12 @@
-# 📚 Library Management
+# 📚 Library Management (Server)
+
+---
+
+**Project Name:** BookStore  
+**Live URL:** [https://l2-assignment-3-peach.vercel.app]
+
+---
+
 
 A RESTful API to manage books and borrowing operations, built with **Express**, **TypeScript**, **MongoDB**, and **Zod** for robust validation and consistent error handling.
  
