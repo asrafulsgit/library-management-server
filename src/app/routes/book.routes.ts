@@ -10,6 +10,6 @@ bookRouter.put('/books/:bookId', updateBook);
 bookRouter.delete('/books/:bookId', deleteBook);
 bookRouter.post('/borrow', borrowBook);
 bookRouter.get('/borrow', booksSummary);
-bookRouter.get('/featured-borrow', featuredBooks);
+bookRouter.get('/featured-books', featuredBooks);
 
 export default bookRouter;

@@ -10,5 +10,5 @@ bookRouter.put('/books/:bookId', book_controllers_1.updateBook);
 bookRouter.delete('/books/:bookId', book_controllers_1.deleteBook);
 bookRouter.post('/borrow', book_controllers_1.borrowBook);
 bookRouter.get('/borrow', book_controllers_1.booksSummary);
-bookRouter.get('/featured-borrow', book_controllers_1.featuredBooks);
+bookRouter.get('/featured-books', book_controllers_1.featuredBooks);
 exports.default = bookRouter;
