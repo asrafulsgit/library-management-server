@@ -88,6 +88,25 @@ export const getAllBooks = async (req: Request, res: Response)  => {
   }
 };
 
+//featured books
+export const featuredBooks = async (req: Request, res: Response)  => {
+  try {
+    const books = await Book.find({available : true})
+      .sort({createdAt : -1})
+      .limit(6);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Books retrieved successfully',
+      data: books
+    });
+  } catch (err: any) {
+     return res.status(500).json(
+      generaleError(err)
+     );
+  }
+};
+
 // Read a book by ID
 export const getBookById = async (req: Request, res: Response)  => {
   try {
@@ -141,11 +160,9 @@ export const updateBook = async (req: Request, res: Response)  => {
     const parsed = bookIdValidation.parse(req.params);
     
 
-    const updatedBook = await Book.findByIdAndUpdate(parsed.bookId, updateData, {
-      new: true
-    });
+    const book = await Book.findById(parsed.bookId);
 
-    if (!updatedBook) {
+    if (!book) {
       return res.status(404).json(
         generateValidationError({
             bookId: {
@@ -163,6 +180,15 @@ export const updateBook = async (req: Request, res: Response)  => {
          
       );
     }
+    
+    book.title = updateData.title ?? book.title;
+    book.author = updateData.author ?? book.author;
+    book.genre = updateData.genre ?? book.genre;
+    book.isbn = updateData.isbn ?? book.isbn;
+    book.description = updateData.description ?? book.description;
+    book.copies = updateData.copies ?? book.copies;
+
+    const updatedBook = await book.save();
 
     return res.status(200).json({
       success: true,

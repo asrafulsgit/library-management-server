@@ -21,7 +21,8 @@ const borrowSchema = new mongoose_1.Schema({
         required: [true, 'Due date is required']
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 const Borrow = (0, mongoose_1.model)('Borrow', borrowSchema);
 exports.default = Borrow;

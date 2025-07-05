@@ -2,8 +2,6 @@ import { model, Schema} from 'mongoose';
 import { IBook } from '../interfaces/book.interface';
 
 
-
-
 const bookSchema: Schema = new Schema<IBook>(
   {
     title: {
@@ -40,18 +38,25 @@ const bookSchema: Schema = new Schema<IBook>(
         message: '{VALUE} is not an integer value'
       }
     },
+    // cover :{
+    //   type: String,
+    //   required: [true, 'Cover is required'],
+    // },
     available: {
       type: Boolean,
       default: true
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    versionKey : false
   }
 );
 bookSchema.pre('save', function (next) {
   if (this.isModified('copies') && this.copies === 0) {
     this.available = false;
+  }else{
+    this.available = true;
   }
   next();
 });

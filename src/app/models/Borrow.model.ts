@@ -23,7 +23,8 @@ const borrowSchema: Schema = new Schema<IBorrowBook>(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    versionKey : false
   }
 );
 

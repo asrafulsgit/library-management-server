@@ -36,16 +36,24 @@ const bookSchema = new mongoose_1.Schema({
             message: '{VALUE} is not an integer value'
         }
     },
+    // cover :{
+    //   type: String,
+    //   required: [true, 'Cover is required'],
+    // },
     available: {
         type: Boolean,
         default: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 bookSchema.pre('save', function (next) {
     if (this.isModified('copies') && this.copies === 0) {
         this.available = false;
+    }
+    else {
+        this.available = true;
     }
     next();
 });

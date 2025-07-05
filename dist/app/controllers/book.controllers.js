@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.booksSummary = exports.borrowBook = exports.deleteBook = exports.updateBook = exports.getBookById = exports.getAllBooks = exports.createBook = void 0;
+exports.booksSummary = exports.borrowBook = exports.deleteBook = exports.updateBook = exports.getBookById = exports.featuredBooks = exports.getAllBooks = exports.createBook = void 0;
 const Book_model_1 = __importDefault(require("../models/Book.model"));
 const Borrow_model_1 = __importDefault(require("../models/Borrow.model"));
 const errorHandler_1 = require("../middlewares/errorHandler");
@@ -69,6 +69,23 @@ const getAllBooks = async (req, res) => {
     }
 };
 exports.getAllBooks = getAllBooks;
+//featured books
+const featuredBooks = async (req, res) => {
+    try {
+        const books = await Book_model_1.default.find({ available: true })
+            .sort({ createdAt: -1 })
+            .limit(6);
+        return res.status(200).json({
+            success: true,
+            message: 'Books retrieved successfully',
+            data: books
+        });
+    }
+    catch (err) {
+        return res.status(500).json((0, errorHandler_1.generaleError)(err));
+    }
+};
+exports.featuredBooks = featuredBooks;
 // Read a book by ID
 const getBookById = async (req, res) => {
     try {
@@ -109,10 +126,8 @@ const updateBook = async (req, res) => {
     try {
         const updateData = errorHandler_1.updateBookSchema.parse(req.body);
         const parsed = errorHandler_1.bookIdValidation.parse(req.params);
-        const updatedBook = await Book_model_1.default.findByIdAndUpdate(parsed.bookId, updateData, {
-            new: true
-        });
-        if (!updatedBook) {
+        const book = await Book_model_1.default.findById(parsed.bookId);
+        if (!book) {
             return res.status(404).json((0, errorHandler_1.generateValidationError)({
                 bookId: {
                     message: 'Book not found',
@@ -127,6 +142,13 @@ const updateBook = async (req, res) => {
                 }
             }));
         }
+        book.title = updateData.title ?? book.title;
+        book.author = updateData.author ?? book.author;
+        book.genre = updateData.genre ?? book.genre;
+        book.isbn = updateData.isbn ?? book.isbn;
+        book.description = updateData.description ?? book.description;
+        book.copies = updateData.copies ?? book.copies;
+        const updatedBook = await book.save();
         return res.status(200).json({
             success: true,
             message: 'Book updated successfully',

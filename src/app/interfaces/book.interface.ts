@@ -8,6 +8,7 @@ export interface IBook extends Document {
   description?: string;
   copies: number;
   available: boolean;
+  // cover : string;
   updateCopiesAfterBorrow(quantity: number) : void;
 }
 
